@@ -1,0 +1,137 @@
+#1
+
+
+# @-decorator of the function
+#importing the functions
+from math import exp, sin, cos, tan
+#function for using  in decorator
+def F(f):
+    #lambda function
+    res  =lambda x : exp(-f(x)**2)
+    return res
+#function for using  in decorator
+def Q(f):
+    #inside function
+    def q(x):
+        return tan(f(x))
+
+#function with decorator
+@F #decorator
+def f(x):
+    return sin(x)
+
+#function with decorator
+@F #decorator
+def q(x):
+    return cos(x)
+
+#function with 2 decorators
+@Q #first decorator
+@F #second decorator
+def h(x):
+    return x
+
+#The variable
+n=5
+#The value of the function in various points
+print ("The function f()  : ")
+for i in range (n+1):
+    z=1/n
+    print(f(z), "->", exp(-sin(z)**2))
+
+print ("The function q()  : ")
+for i in range (n+1):
+    z=1/n
+    print(q(z), "->", exp(-cos(z)**2))
+
+print("The function h()  : ")
+for i in range(n + 1):
+    z = 1/n
+    print(h(z), "->", tan(exp(-z**2)))
+    
+   
+   
+
+#2
+
+
+#decorator of the class
+#function with the argument  -class
+#and with result the  - class object
+def F(A):
+    #inside class
+    class Alpha(A):
+        #the method of the specimenof inside class
+        def hi(self):
+            print ("The Class Alpha")
+    # the result of the function  -objext of the class
+    return Alpha
+
+#function with the argument  -class
+#and with result the  - class object
+def Q(A):
+    #inside class
+    class Bravo(A):
+        # the method of the specimenof inside class
+        def hi(self):
+            print("The Class Bravo")
+        # the result of the function  -objext of the class
+    return Bravo
+
+#The class with the decorator
+@F #decorator
+class First:
+    #method
+    def hello(self):
+        print ("Class First")
+
+#The class with the decorator
+@F #decorator
+class Second:
+    #method
+    def hello(self):
+        print ("Class Second")
+
+#The class with 2 decorators
+#The class with the decorator
+@Q #second decorator
+@F # first decorator
+class Third:
+    #method
+    def hello(self):
+        print ("Class Third")
+
+#the function for calling methods of the specimen
+def show_obj(obj):
+    #the class of the cpecimen
+    print ("The class of the specimen", obj.__class__)
+    #calling for the methods
+    obj.hi()
+    obj.hello()
+
+# the function for the reflection of the class characteristics
+def show_class(A):
+    #the name of the class
+    print ("The name of the class: ", A.__name__)
+    #the bacic class
+    print ("The basic class:", A.__bases__)
+    #the order of heritance
+    print ("The order of the heritance", A.__mro__)
+
+#creating the specimen
+one= First()
+two=Second()
+three = Third()
+
+#methods of specimens
+print ("The specimens are: ")
+for obj in [one,two,three]:
+    show_obj(obj)
+
+#characteristics of the classes
+print ("Classes")
+for A in [First,Second,Third]:
+    show_class(A)
+    
+    
+    
